@@ -12,8 +12,10 @@ import scala.reflect.runtime.universe._
 import scala.tools.reflect.ToolBox
 
 object Main extends App {
-  val path = Paths.get(if (args.length >= 1) args(0) else ".")
-  val sourceFiles = FileFinder.listFiles(path, ".scala")
+  val inputPath = if (args.length >= 1) args(0) else "."
+  val outputPath = if (args.length >= 2) args(1) else "scaldy.dot"
+
+  val sourceFiles = FileFinder.listFiles(Paths.get(inputPath), ".scala")
 
   def getClassesFromFile(file: Path): List[BeanClass] = {
     val toolbox = currentMirror.mkToolBox()
@@ -58,7 +60,7 @@ object Main extends App {
       |""".stripMargin
   }
 
-  def output =
+  val output =
     s"""digraph "Class diagram" {
       |graph[splines=true dpi=55]
       |node[shape=none width=0 height=0 margin=0 fontname=Verdana fontsize=14]
@@ -71,7 +73,7 @@ object Main extends App {
   print(output)
 
   val charOutput: OutputStreamWriter = new OutputStreamWriter(
-    new FileOutputStream("../graph.dot"),
+    new FileOutputStream(outputPath),
     Charset.forName("UTF-8").newEncoder()
   )
   charOutput.write(output)
