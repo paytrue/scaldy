@@ -23,8 +23,12 @@ it will scan .scala generate a scaldy.dot file there, then you can run
 
 `C:\dev\scaldy>dot -Tsvg scaldy.dot -o ./src/test/sample/posts/diagram.svg`
 
-to generate [this diagram](./src/test/sample/posts/diagram.svg).
+to generate
+ 
+ ![this diagram](/src/test/sample/posts/diagram.svg?raw=true "Basic Model").
 
 The result is a bit disconnected because there are no @BeanProperty annotations in this model. 
 This is roughly the same class structure where some defs have been replaced by @BeanProperty var.
-This sample is under /sample/beanposts/ and generates [this diagram](./src/test/sample/beanposts/diagram.svg).
+This sample is under /sample/beanposts/ and generates
+ 
+ ![this diagram](/src/test/sample/beanposts/diagram.svg?raw=true "Basic Model").
