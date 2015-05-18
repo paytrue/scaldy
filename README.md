@@ -25,10 +25,12 @@ it will scan .scala generate a scaldy.dot file there, then you can run
 
 to generate
  
- ![this diagram](./src/test/sample/posts/diagram.svg "Basic Model").
+ ![this diagram](./src/test/sample/posts/diagram.png "Basic Model").
 
 The result is a bit disconnected because there are no @BeanProperty annotations in this model. 
 This is roughly the same class structure where some defs have been replaced by @BeanProperty var.
 This sample is under /sample/beanposts/ and generates
  
- ![this diagram](./src/test/sample/beanposts/diagram.svg "Annotated Model").
+ ![this diagram](./src/test/sample/beanposts/diagram.png "Annotated Model").
+ 
+ Note: using .png for the embedded images instead of .svg because of [this issue](https://github.com/isaacs/github/issues/316)
