@@ -19,7 +19,7 @@ For example, if you are in sbt and run
 
 `> run C:\dev\scaldy\src\test\sample\posts`
 
-it will scan .scala generate a scaldy.dot file there, then you can run
+it will parse the .scala files in that path and generate a scaldy.dot file, then you can run
 
 `C:\dev\scaldy>dot -Tsvg scaldy.dot -o ./src/test/sample/posts/diagram.svg`
 
