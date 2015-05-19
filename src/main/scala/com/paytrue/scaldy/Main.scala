@@ -1,7 +1,7 @@
 package com.paytrue.scaldy
 
 import java.io._
-import java.nio.charset.Charset
+import java.nio.charset.{StandardCharsets, Charset}
 import java.nio.file.{Files, Path, Paths}
 
 import scala.collection.JavaConversions._
@@ -43,12 +43,12 @@ object Main extends App {
       |""".stripMargin
   val charOutput: OutputStreamWriter = new OutputStreamWriter(
     new FileOutputStream(outputPath),
-    Charset.forName("UTF-8").newEncoder()
+    StandardCharsets.UTF_8
   )
 
   def getClassesFromFile(file: Path): List[BeanClass] = {
     val toolbox = currentMirror.mkToolBox()
-    val fileContents = Source.fromFile(file.toString).getLines().drop(1).mkString("\n")
+    val fileContents = Source.fromFile(file.toString, StandardCharsets.UTF_8.name()).getLines().drop(1).mkString("\n")
     val tree = toolbox.parse(fileContents)
     val traverser = new ClassDefTraverser(file)
     traverser.traverse(tree)
