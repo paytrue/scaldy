@@ -6,7 +6,8 @@ lazy val root = (project in file(".")).
     organization := "com.paytrue",
     version := "0.1",
     scalaVersion := "2.11.7",
-    artifactName := { (_, _, _) => "com.paytrue.scaldy.jar" },
+    artifactPath in Compile in packageBin <<=
+      baseDirectory { base => base / "release" / "com.paytrue.scaldy.jar" },
     libraryDependencies += "org.scala-lang" % "scala-compiler" % scalaVersion.value
   )
 
