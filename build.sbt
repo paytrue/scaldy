@@ -8,7 +8,7 @@ lazy val root = (project in file(".")).
     organization := "com.paytrue",
     version := "0.1",
     scalaVersion := "2.11.+",
-    libraryDependencies += scalaCompiler
+    libraryDependencies ++= Seq(scalaCompiler, "com.github.scopt" % "scopt_2.11" % "3+")
   )
 
 scalariformSettings
