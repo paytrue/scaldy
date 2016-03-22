@@ -10,8 +10,12 @@ lazy val root = (project in file(".")).
     scalaVersion := "2.11.+",
     artifactPath in Compile in packageBin <<=
       baseDirectory { base => base / "release" / "com.paytrue.scaldy.jar" },
-    libraryDependencies ++= Seq(scalaCompiler, "com.github.scopt" % "scopt_2.11" % "3+")
+    libraryDependencies ++= Seq(scalaCompiler, "com.github.scopt" % "scopt_2.11" % "3+"),
+    retrieveManaged := true
   )
+  
+    artifactPath in Compile in packageBin <<=
+      baseDirectory { base => base / "release" / "scopt_2.11-3.4.0.jar" }
 
 scalariformSettings
 
