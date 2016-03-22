@@ -8,6 +8,8 @@ import scala.collection.JavaConversions._
 case class Config(inputPath: String = ".", outputPath: File = new File("scaldy.dot"), groupSelector: String = "") {
   // allows to generate only one subgraph by specifying the name of a class in the subgraph, see def subGraph
   val selectGroup = groupSelector != ""
+
+  val selectClasses = groupSelector.split(",")
 }
 
 object Main extends App {
@@ -21,7 +23,7 @@ object Main extends App {
     } text "out is an optional output file, scaldy.dot by default"
     opt[String]('g', "group") valueName "<class name>" action {
       (x, c) ⇒ c.copy(groupSelector = x)
-    } text "group is an optional subgraph selector, name one class within the group to generate only its subgraph"
+    } text "group is an optional subgraph selector, list classes (comma separated class names) within the group to generate only their subgraph"
   }
 
   parser.parse(args, Config()) match {
@@ -54,7 +56,7 @@ object Main extends App {
 
     def subGraph(sourceFile: Path, classes: Traversable[BeanClass], color: Color) = {
       val classList = classes.toList
-      if (!c.selectGroup || classList.map(_.name).contains(c.groupSelector)) {
+      if (!c.selectGroup || classList.map(_.name).exists(c.selectClasses.contains(_))) {
         val (innerRels, outerRels) = classList.flatMap(_.relationships).filter(rel ⇒ allNames.contains(rel.to)).partition(rel ⇒ classList.map(_.name).contains(rel.to))
         s"""subgraph "cluster_${sourceFile.toString}" {
            |style=invis
