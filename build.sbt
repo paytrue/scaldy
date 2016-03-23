@@ -14,9 +14,6 @@ lazy val root = (project in file(".")).
     retrieveManaged := true
   )
   
-    artifactPath in Compile in packageBin <<=
-      baseDirectory { base => base / "release" / "scopt_2.11-3.4.0.jar" }
-
 scalariformSettings
 
 ScalariformKeys.preferences := ScalariformKeys.preferences.value
